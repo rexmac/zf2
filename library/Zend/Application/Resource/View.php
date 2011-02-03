@@ -79,6 +79,16 @@ class View extends AbstractResource
             if(isset($options['doctype'])) {
                 $this->_view->broker('doctype')->setDoctype(strtoupper($options['doctype']));
             }
+
+            if(isset($options['doctype'])) {
+                $this->_view->broker('doctype')->setDoctype(strtoupper($options['doctype']));
+                if(isset($options['charset']) && $this->_view->broker('doctype')->isHtml5()) {
+                    $this->_view->broker('headMeta')->setCharset($options['charset']);
+                }
+            }
+            if(isset($options['contentType'])) {
+                $this->_view->broker('headMeta')->appendHttpEquiv('Content-Type', $options['contentType']);
+            }
         }
         return $this->_view;
     }
